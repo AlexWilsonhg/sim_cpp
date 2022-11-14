@@ -24,6 +24,9 @@
     <ClCompile Include="source\stale_order_pruner.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\order_generator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="header\agent.h">
@@ -42,6 +45,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="header\stale_order_pruner.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="header\restaurant.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="header\order_generator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

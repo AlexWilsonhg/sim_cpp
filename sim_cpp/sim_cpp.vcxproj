@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="source\agent.cpp" />
+    <ClCompile Include="source\order_generator.cpp" />
     <ClCompile Include="source\sim_cpp.cpp" />
     <ClCompile Include="source\stale_order_pruner.cpp" />
   </ItemGroup>
@@ -148,7 +149,9 @@
     <ClInclude Include="header\completed_order_metrics.h" />
     <ClInclude Include="header\market_conditions.h" />
     <ClInclude Include="header\order.h" />
+    <ClInclude Include="header\order_generator.h" />
     <ClInclude Include="header\position.h" />
+    <ClInclude Include="header\restaurant.h" />
     <ClInclude Include="header\stale_order_pruner.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -11,7 +11,7 @@ public:
 	void CompleteOrder();
 	bool OrderMeetsThresholds(Order* order);
 
-private:
+public:
 	Order* currentOrder;
 	CompletedOrderMetrics metrics;
 	float minPayThreshold;
