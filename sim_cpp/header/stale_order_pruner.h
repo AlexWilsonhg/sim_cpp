@@ -1,6 +1,7 @@
 #pragma once
-#include "order.h"
 #include <vector>
+
+#include "order.h"
 
 class StaleOrderPruner
 {
