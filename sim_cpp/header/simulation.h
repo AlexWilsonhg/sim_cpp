@@ -15,5 +15,9 @@ private:
 	OrderScheduler scheduler;
 
 	std::vector<Agent> agents;
+	std::vector<Agent*> availableAgents;
+	std::vector<Agent*> busyAgents;
 	Agent* primaryAgent;
+
+	std::vector<Order> orderQueue;
 };

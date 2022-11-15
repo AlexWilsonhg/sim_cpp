@@ -8,7 +8,6 @@ Agent::Agent(float minPay, float minPayPerMile, float maxMile, Position _pos) :
 	pos{ _pos },
 	currentOrder{ nullptr } {}
 
-
 void Agent::AcceptOrder(Order* order)
 {
 	this->currentOrder = order;
@@ -20,13 +19,13 @@ void Agent::CompleteOrder()
 	this->metrics.milesDriven += currentOrder->milesToComplete;
 	this->metrics.totalPay += currentOrder->pay;
 
-	this->currentOrder = nullptr;
+	delete(currentOrder);
 }
 
-bool Agent::OrderMeetsThresholds(Order* order)
+bool Agent::OrderMeetsThresholds(const Order& order)
 {
-	float orderPay = order->pay;
-	float orderMiles = order->milesToComplete;
+	float orderPay = order.pay;
+	float orderMiles = order.milesToComplete;
 	float orderPayPerMile = orderPay / orderMiles;
 
 	if (orderPay >= this->minPayThreshold &&

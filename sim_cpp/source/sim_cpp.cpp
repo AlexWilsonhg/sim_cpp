@@ -18,5 +18,4 @@ int main()
     OrderGenerator generator(market, { rest1, rest2, rest3, rest4 });
 
     std::vector<Order> orders = generator.GenerateOrders();
-
 }

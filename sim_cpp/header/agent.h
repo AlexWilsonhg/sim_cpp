@@ -9,9 +9,9 @@ public:
 	Agent(float minPay, float minPayPerMile, float maxMile, Position _pos);
 	void AcceptOrder(Order* order);
 	void CompleteOrder();
-	bool OrderMeetsThresholds(Order* order);
+	bool OrderMeetsThresholds(const Order& order);
 
-public:
+private:
 	Order* currentOrder;
 	CompletedOrderMetrics metrics;
 	float minPayThreshold;
