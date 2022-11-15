@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
-
+#include <random>
+#include <algorithm>
 #include "market_conditions.h"
 #include "restaurant.h"
 #include "order.h"
@@ -20,5 +21,8 @@ private:
 	std::vector<Restaurant> restaurantProbabilityList;
 	
 	int currentRestaurantIndex{ 0 };
+
+	std::default_random_engine rand;
+	std::normal_distribution<float> dist;
 
 };

@@ -7,15 +7,25 @@
 #include "..//header//market_conditions.h"
 #include "..//header//order_generator.h"
 
+#include <chrono>
+
 int main()
 {
-    MarketConditions market(2.50, 5, 5.0f, 5.0f);
-    Restaurant rest1(1, Position(1.0f, 1.0f), 15);
-    Restaurant rest2(2, Position(1.0f, 1.0f), 15);
-    Restaurant rest3(3, Position(1.0f, 1.0f), 6);
-    Restaurant rest4(4, Position(1.0f, 1.0f), 2);
- 
-    OrderGenerator generator(market, { rest1, rest2, rest3, rest4 });
+	Restaurant rest1(1, Position(1, 1), 5);
+	Restaurant rest2(2, Position(1, 1), 5);
 
-    std::vector<Order> orders = generator.GenerateOrders();
+	MarketConditions market(2.50, 100, 2, 3);
+
+	OrderGenerator generator(market, { rest1, rest2 });
+
+	auto start = std::chrono::high_resolution_clock::now();
+
+	std::vector<Order> orders = generator.GenerateOrders();
+
+	auto end = std::chrono::high_resolution_clock::now();
+
+	auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+
+	std::cout << "generated 1,000,000 orders in " << duration.count() << " microseconds";
+
 }
