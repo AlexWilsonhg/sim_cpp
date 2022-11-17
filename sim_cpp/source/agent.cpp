@@ -8,9 +8,10 @@ Agent::Agent(float minPay, float minPayPerMile, float maxMile, Position _pos) :
 	pos{ _pos },
 	currentOrder{ nullptr } {}
 
-void Agent::AcceptOrder(Order* order)
+
+void Agent::AcceptOrder(Order& order)
 {
-	this->currentOrder = order;
+	currentOrder = &order;
 }
 
 void Agent::CompleteOrder()
@@ -20,6 +21,12 @@ void Agent::CompleteOrder()
 	this->metrics.totalPay += currentOrder->pay;
 
 	delete(currentOrder);
+}
+
+bool Agent::IsOnOrder()
+{
+	if (currentOrder) { return true; }
+	return false;
 }
 
 bool Agent::OrderMeetsThresholds(const Order& order)

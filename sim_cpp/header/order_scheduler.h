@@ -9,6 +9,6 @@
 class OrderScheduler
 {
 public:
-	std::vector<OrderAssignment> AssignOrders(std::vector<Order>& orders, std::vector<Agent>& agents);
+	std::vector<Order> AssignOrders(std::vector<Order> orders, std::vector<Agent>& agents);
 	std::vector<Agent*> GetSortedAgentsList(Position pos, std::vector<Agent>& agents);
 };

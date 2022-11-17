@@ -8,8 +8,9 @@ class Agent
 public:
 	Agent(float minPay, float minPayPerMile, float maxMile, Position _pos);
 
-	void AcceptOrder(Order* order);
+	void AcceptOrder(Order& order);
 	void CompleteOrder();
+	bool IsOnOrder();
 	bool OrderMeetsThresholds(const Order& order);
 	Position Pos() { return pos; }
 

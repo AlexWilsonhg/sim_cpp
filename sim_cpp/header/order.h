@@ -13,10 +13,10 @@ struct Order
 
 
 
-	int restaurantID;
-	Position pos;
-	float pay;
-	float milesToComplete;
-	int ticksToComplete;
-	int ticksInQueue;
+	int restaurantID{ 0 };
+	Position pos{ 1.0f, 1.0f };
+	float pay{ 0.0f };
+	float milesToComplete{ 0.0f };
+	int ticksToComplete{ 0 };
+	int ticksInQueue{ 0 };
 };
