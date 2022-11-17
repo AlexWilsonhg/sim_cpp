@@ -7,9 +7,11 @@ class Agent
 {
 public:
 	Agent(float minPay, float minPayPerMile, float maxMile, Position _pos);
+
 	void AcceptOrder(Order* order);
 	void CompleteOrder();
 	bool OrderMeetsThresholds(const Order& order);
+	Position Pos() { return pos; }
 
 private:
 	Order* currentOrder;
