@@ -3,6 +3,7 @@
 
 struct Order
 {
+	
 	Order(int restID, Position _pos, float _pay, float _milesToComplete, int _ticksToComplete) : 
 		restaurantID{ restID },
 		pos{ _pos },
@@ -10,8 +11,6 @@ struct Order
 		milesToComplete{ _milesToComplete },
 		ticksToComplete{ _ticksToComplete },
 		ticksInQueue{ 0 } {}
-
-
 
 	int restaurantID{ 0 };
 	Position pos{ 1.0f, 1.0f };

@@ -1,23 +1,22 @@
 #pragma once
 #include "order_generator.h"
+#include "order_scheduler.h"
+#include "stale_order_pruner.h"
 #include "agent.h"
-
-class OrderScheduler {};
 
 class Simulation
 {
 public:
-	Simulation(std::vector<Agent> agents, OrderGenerator& generator, OrderScheduler& scheduler);
+	Simulation(std::vector<Agent> agents, OrderGenerator& generator, OrderScheduler& scheduler, StaleOrderPruner& _orderPruner);
 	void Tick();
 
 private:
 	OrderGenerator generator;
 	OrderScheduler scheduler;
+	StaleOrderPruner orderPruner;
 
 	std::vector<Agent> agents;
-	std::vector<Agent*> availableAgents;
-	std::vector<Agent*> busyAgents;
 	Agent* primaryAgent;
 
-	std::vector<Order> orderQueue;
+	std::vector<Order*> orderQueue;
 };

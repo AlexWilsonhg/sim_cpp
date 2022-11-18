@@ -4,30 +4,30 @@
 #include "..//header//order_scheduler.h"
 
 
-std::vector<Order> OrderScheduler::AssignOrders(std::vector<Order> orders, std::vector<Agent>& agents)
+std::vector<Order*> OrderScheduler::AssignOrders(std::vector<Order*> orders, std::vector<Agent>& agents)
 {
-	std::vector<Order> unassignedOrders;
-	std::vector<Order> ordersCopy = orders;
-	for (auto order = ordersCopy.begin(); order != ordersCopy.end();)
+	std::vector<Order*> unassignedOrders;
+	unassignedOrders.reserve(unassignedOrders.size());
+	for (auto order = orders.begin(); order != orders.end();)
 	{
 		bool orderWasAssigned = false;
-		std::vector<Agent*> sortedAgents = GetSortedAgentsList(order->pos, agents);
+		std::vector<Agent*> sortedAgents = GetSortedAgentsList((*order)->pos, agents);
 		for (Agent* agent : sortedAgents)
 		{
 			if (!agent->IsOnOrder() && agent->OrderMeetsThresholds(*order))
 			{
-				agent->AcceptOrder(*order);
+				agent->AcceptOrder((*order));
 				orderWasAssigned = true;
 				break;
 			}
 		}
 		if (orderWasAssigned)
 		{
-			order = ordersCopy.erase(order);
+			order = orders.erase(order);
 		}
 		else
 		{
-			unassignedOrders.push_back(*order);
+			unassignedOrders.push_back((*order));
 			order++;
 		}
 	}

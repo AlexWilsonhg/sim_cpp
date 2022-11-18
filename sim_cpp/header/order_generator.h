@@ -10,7 +10,7 @@ class OrderGenerator
 {
 public:
 	OrderGenerator(MarketConditions _market, std::vector<Restaurant> _restaurants);
-	std::vector<Order> GenerateOrders();
+	std::vector<Order*> GenerateOrders();
 
 private:
 	void InitRestaurantProbabilityList(std::vector<Restaurant> restaurants);

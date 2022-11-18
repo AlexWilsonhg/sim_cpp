@@ -21,9 +21,9 @@ void OrderGenerator::InitRestaurantProbabilityList(std::vector<Restaurant> resta
 	std::shuffle(std::begin(restaurantProbabilityList), std::end(restaurantProbabilityList), rand);
 }
 
-std::vector<Order> OrderGenerator::GenerateOrders()
+std::vector<Order*> OrderGenerator::GenerateOrders()
 {
-	std::vector<Order> orders;
+	std::vector<Order*> orders;
 	orders.reserve(market.ordersPerTick);
 	for(int i = 0; i < market.ordersPerTick; i++)
 	{	
@@ -38,7 +38,7 @@ std::vector<Order> OrderGenerator::GenerateOrders()
 		float miles = dist(rand) * market.mileScaleValue;
 		int ticks = 3;
 
-		orders.push_back(Order(ID, pos, pay, miles, ticks));
+		orders.push_back(new Order(ID, pos, pay, miles, ticks));
 	}
 	return orders;
 }
