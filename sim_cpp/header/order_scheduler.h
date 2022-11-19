@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <map>
 
 #include "order.h"
 #include "agent.h"
@@ -9,6 +10,12 @@
 class OrderScheduler
 {
 public:
-	std::vector<Order*> AssignOrders(std::vector<Order*> orders, std::vector<Agent>& agents);
-	std::vector<Agent*> GetSortedAgentsList(Position pos, std::vector<Agent>& agents);
+	void AssignOrders(std::vector<Order>& orders, std::vector<Agent>& agents);
+	std::vector<Agent*> GetSortedAgentsList(int restaurantID);
+
+private:
+	void BuildSortedAgentsList(int restaurantID, Position pos, std::vector<Agent>& agents);
+
+private:
+	std::map<int, std::vector<Agent*>> sortedAgentsList;
 };

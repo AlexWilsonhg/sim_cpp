@@ -6,45 +6,44 @@ Agent::Agent(float minPay, float minPayPerMile, float maxMile, Position _pos) :
 	minPayPerMileThreshold{ minPayPerMile },
 	maxMilesThreshold{ maxMile },
 	pos{ _pos },
-	currentOrder{ nullptr } {}
+	isOnOrder{ false } {}
 
 void Agent::Tick()
 {
 	if (IsOnOrder())
 	{
-		currentOrder->ticksToComplete--;
-		if (currentOrder->ticksToComplete <= 0)
+		currentOrder.ticksToComplete--;
+		if (currentOrder.ticksToComplete <= 0)
 		{
 			CompleteOrder();
 		}
 	}
 }
 
-void Agent::AcceptOrder(Order* order)
+void Agent::AcceptOrder(Order order)
 {
 	currentOrder = order;
+	isOnOrder = true;
 }
 
 void Agent::CompleteOrder()
 {
 	this->metrics.ordersComplete++;
-	this->metrics.milesDriven += currentOrder->milesToComplete;
-	this->metrics.totalPay += currentOrder->pay;
+	this->metrics.milesDriven += currentOrder.milesToComplete;
+	this->metrics.totalPay += currentOrder.pay;
 
-	delete(currentOrder);
-	currentOrder = nullptr;
-}
+	isOnOrder = false;
+}	
 
 bool Agent::IsOnOrder()
 {
-	if (currentOrder) { return true; }
-	return false;
+	return isOnOrder;
 }
 
-bool Agent::OrderMeetsThresholds(Order* order)
+bool Agent::OrderMeetsThresholds(Order& order)
 {
-	float orderPay = order->pay;
-	float orderMiles = order->milesToComplete;
+	float orderPay = order.pay;
+	float orderMiles = order.milesToComplete;
 	float orderPayPerMile = orderPay / orderMiles;
 
 	if (orderPay >= this->minPayThreshold &&

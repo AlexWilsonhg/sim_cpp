@@ -3,7 +3,11 @@
 
 struct Order
 {
-	
+	Order()
+	{
+
+	}
+
 	Order(int restID, Position _pos, float _pay, float _milesToComplete, int _ticksToComplete) : 
 		restaurantID{ restID },
 		pos{ _pos },

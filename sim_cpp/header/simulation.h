@@ -18,5 +18,5 @@ private:
 	std::vector<Agent> agents;
 	Agent* primaryAgent;
 
-	std::vector<Order*> orderQueue;
+	std::vector<Order> orderQueue;
 };

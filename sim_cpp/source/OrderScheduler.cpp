@@ -1,17 +1,26 @@
 #pragma once
-#include <map>
 
 #include "..//header//order_scheduler.h"
 
 
-std::vector<Order*> OrderScheduler::AssignOrders(std::vector<Order*> orders, std::vector<Agent>& agents)
+void OrderScheduler::AssignOrders(std::vector<Order>& orders, std::vector<Agent>& agents)
 {
-	std::vector<Order*> unassignedOrders;
-	unassignedOrders.reserve(unassignedOrders.size());
+	std::vector<Agent*> sortedAgents;
 	for (auto order = orders.begin(); order != orders.end();)
 	{
 		bool orderWasAssigned = false;
-		std::vector<Agent*> sortedAgents = GetSortedAgentsList((*order)->pos, agents);
+		// if we've already computed the sorted list of agent distances
+		if (sortedAgentsList.count(order->restaurantID))
+		{
+			sortedAgents = GetSortedAgentsList(order->restaurantID);
+		}
+
+		else
+		{
+			BuildSortedAgentsList(order->restaurantID, order->pos, agents);
+			sortedAgents = GetSortedAgentsList(order->restaurantID);
+		}
+		
 		for (Agent* agent : sortedAgents)
 		{
 			if (!agent->IsOnOrder() && agent->OrderMeetsThresholds(*order))
@@ -27,16 +36,18 @@ std::vector<Order*> OrderScheduler::AssignOrders(std::vector<Order*> orders, std
 		}
 		else
 		{
-			unassignedOrders.push_back((*order));
 			order++;
 		}
 	}
-	return unassignedOrders;
 }
 
-std::vector<Agent*> OrderScheduler::GetSortedAgentsList(Position pos, std::vector<Agent>& agents)
+std::vector<Agent*> OrderScheduler::GetSortedAgentsList(int restaurantID)
 {
-	std::vector<Agent*> sortedAgents;
+	return sortedAgentsList[restaurantID];
+}
+
+void OrderScheduler::BuildSortedAgentsList(int restaurantID, Position pos, std::vector<Agent>& agents)
+{
 	std::map<float, Agent*> distanceOfAgents;
 
 	for (Agent& agent : agents)
@@ -45,9 +56,12 @@ std::vector<Agent*> OrderScheduler::GetSortedAgentsList(Position pos, std::vecto
 		distanceOfAgents.insert({ distance, &agent });
 	}
 
-	for (auto& agent : distanceOfAgents)
+	std::vector<Agent*> sortedAgents;
+
+	for (auto agent : distanceOfAgents)
 	{
 		sortedAgents.push_back(agent.second);
 	}
-	return sortedAgents;
+
+	sortedAgentsList.insert({ restaurantID, sortedAgents });
 }

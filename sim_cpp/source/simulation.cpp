@@ -13,9 +13,9 @@ void Simulation::Tick()
 {
 	orderQueue = orderPruner.Prune(orderQueue);
 
-	for (Order* order : orderQueue)
+	for (Order& order : orderQueue)
 	{
-		order->ticksInQueue++;
+		order.ticksInQueue++;
 	}
 
 	for (Agent& agent : agents)
@@ -23,9 +23,9 @@ void Simulation::Tick()
 		agent.Tick();
 	}
 
-	std::vector<Order*> newOrders;
+	std::vector<Order> newOrders;
 	newOrders = generator.GenerateOrders();
 	orderQueue.insert(orderQueue.end(), newOrders.begin(), newOrders.end());
 	
-	orderQueue = scheduler.AssignOrders(orderQueue, agents);
+	scheduler.AssignOrders(orderQueue, agents);
 }
