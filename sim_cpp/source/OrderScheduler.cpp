@@ -41,7 +41,7 @@ void OrderScheduler::AssignOrders(std::vector<Order>& orders, std::vector<Agent>
 	}
 }
 
-std::vector<Agent*> OrderScheduler::GetSortedAgentsList(int restaurantID)
+std::vector<Agent*>& OrderScheduler::GetSortedAgentsList(int restaurantID)
 {
 	return sortedAgentsList[restaurantID];
 }

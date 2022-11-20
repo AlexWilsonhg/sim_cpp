@@ -11,7 +11,7 @@ class OrderScheduler
 {
 public:
 	void AssignOrders(std::vector<Order>& orders, std::vector<Agent>& agents);
-	std::vector<Agent*> GetSortedAgentsList(int restaurantID);
+	std::vector<Agent*>& GetSortedAgentsList(int restaurantID);
 
 private:
 	void BuildSortedAgentsList(int restaurantID, Position pos, std::vector<Agent>& agents);
