@@ -48,12 +48,12 @@ std::vector<Agent*>& OrderScheduler::GetSortedAgentsList(int restaurantID)
 
 void OrderScheduler::BuildSortedAgentsList(int restaurantID, Position pos, std::vector<Agent>& agents)
 {
-	std::map<float, Agent*> distanceOfAgents;
+	std::multimap<float, Agent*> distanceOfAgents;
 
 	for (Agent& agent : agents)
 	{
 		float distance = Position::dist(agent.Pos(), pos);
-		distanceOfAgents.insert({ distance, &agent });
+		auto foo = distanceOfAgents.insert({distance, &agent});
 	}
 
 	std::vector<Agent*> sortedAgents;

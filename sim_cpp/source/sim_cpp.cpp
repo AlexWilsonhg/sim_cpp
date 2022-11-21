@@ -17,7 +17,7 @@ int main()
 		Agent(2.5f, 1.0f, 10.0f, Position(1.0f, 1.0f)),
 		Agent(5.0f, 1.0f, 10.0f, Position(1.0f, 1.3f)),
 		Agent(6.0f, 1.25f, 10.0f, Position(1.1f, 1.0f)),
-		Agent(2.5f, 1.25f, 10.0f, Position(1.0f, 1.1f)),
+		Agent(2.5f, 1.25f, 10.0f, Position(1.0f, 1.2f)),
 	};
 
 	std::vector<Restaurant> restaurants
@@ -35,7 +35,7 @@ int main()
 
 	auto start = std::chrono::high_resolution_clock::now();
 
-	for (int i = 0; i <= 1000000; ++i)
+	for (int i = 0; i <= 1; ++i)
 	{
 		sim.Tick();
 	}
